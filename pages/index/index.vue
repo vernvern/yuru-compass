@@ -6,7 +6,7 @@
 
 		<uni-link :href="href" :text="href"></uni-link>
 		<br>
-				<text class="intro">2333</text>
+				<text class="intro">233323</text>
 	</view>
 </template>
 
