@@ -2,6 +2,8 @@
 	<view class="uni-easyinput" :class="{ 'uni-easyinput-error': msg }" :style="boxStyle">
 		<view class="uni-easyinput__content" :class="inputContentClass" :style="inputContentStyle">
 			<uni-icons v-if="prefixIcon" class="content-clear-icon" :type="prefixIcon" color="#c0c4cc" @click="onClickIcon('prefix')" size="22"></uni-icons>
+			<slot name="left">
+			</slot>
 			<textarea
 				v-if="type === 'textarea'"
 				class="uni-easyinput__content-textarea"
@@ -16,6 +18,7 @@
 				:focus="focused"
 				:autoHeight="autoHeight"
 				:cursor-spacing="cursorSpacing"
+				:adjust-position="adjustPosition"
 				@input="onInput"
 				@blur="_Blur"
 				@focus="_Focus"
@@ -38,12 +41,14 @@
 				:focus="focused"
 				:confirmType="confirmType"
 				:cursor-spacing="cursorSpacing"
+				:adjust-position="adjustPosition"
 				@focus="_Focus"
 				@blur="_Blur"
 				@input="onInput"
 				@confirm="onConfirm"
         @keyboardheightchange="onkeyboardheightchange"
 			/>
+
 			<template v-if="type === 'password' && passwordIcon">
 				<!-- 开启密码时显示小眼睛 -->
 				<uni-icons
@@ -102,6 +107,7 @@
  * @property {String}	primaryColor	设置主题色（默认#2979ff）
  * @property {Boolean}	trim	是否自动去除两端的空格
  * @property {Boolean}	cursorSpacing	指定光标与键盘的距离，单位 px
+ * @property {Boolean}  ajust-position 当键盘弹起时，是否上推内容，默认值：true
  * @value both	去除两端空格
  * @value left	去除左侧空格
  * @value right	去除右侧空格
@@ -220,6 +226,10 @@ export default {
 			default: 0
 		},
 		passwordIcon: {
+			type: Boolean,
+			default: true
+		},
+		adjustPosition:{
 			type: Boolean,
 			default: true
 		},
@@ -418,7 +428,7 @@ export default {
 		 */
 		onBlur() {
 			this.focused = false;
-			this.$emit('focus', null);
+			this.$emit('blur', null);
 		},
 		_Blur(event) {
 			let value = event.detail.value;

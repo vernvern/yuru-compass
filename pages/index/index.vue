@@ -1,20 +1,35 @@
 <template>
-	<view class="container">
-		
-		<view class="intro">本项目已包含uni ui组件，无需import和注册，可直接使用。在代码区键入字母u，即可通过代码助手列出所有可用组件。光标置于组件名称处按F1，即可查看组件文档。</view>
-		<text class="intro">详见：</text>
 
-		<uni-link :href="href" :text="href"></uni-link>
-		<br>
-				<text class="intro">233323</text>
+	<view>
+		<uni-row class="demo-uni-row">
+			<uni-col :xs="12" :sm="6" :md="6" :lg="6" :xl="6" v-for="item of menu">
+				<view class="demo-uni-col ">
+					<navigator :url="'../../' + item.nav">
+						<button type="primary" plain="true">{{ item.name }}</button>
+					</navigator>
+				</view>
+			</uni-col>
+		</uni-row>
+
+
+
 	</view>
+
+
 </template>
 
 <script>
 	export default {
 		data() {
 			return {
-				href: 'https://uniapp.dcloud.io/component/README?id=uniui'
+
+				menu: [{
+					name: "太阳月亮轨迹",
+					nav: "pages/2rd/sun-moon-path"
+				}, {
+					name:'关于',
+					nav: 'pages/about/about'
+				}],
 			}
 		},
 		methods: {
@@ -24,9 +39,40 @@
 </script>
 
 <style>
-	.container {
-		padding: 20px;
-		font-size: 14px;
-		line-height: 24px;
+	.demo-uni-row {
+		margin-bottom: 20px;
+		/* QQ、抖音小程序文档写有 :host，但实测不生效 */
+		/* 百度小程序没有 :host，需要设置block */
+		/* #ifdef MP-TOUTIAO || MP-QQ || MP-BAIDU */
+		display: block;
+		/* #endif */
+	}
+
+	/* 支付宝小程序没有 demo-uni-row 层级 */
+	/* 微信小程序使用了虚拟化节点，没有 demo-uni-row 层级 */
+	/* #ifdef MP-ALIPAY || MP-WEIXIN */
+	/deep/ .uni-row {
+		margin-bottom: 10px;
+	}
+
+	/* #endif */
+
+	.demo-uni-col {
+		height: 50px;
+		padding: 10px;
+
+		border-radius: 4px;
+	}
+
+	.dark_deep {
+		background-color: #99a9bf;
+	}
+
+	.dark {
+		background-color: #d3dce6;
+	}
+
+	.light {
+		background-color: #e5e9f2;
 	}
 </style>
