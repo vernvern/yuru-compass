@@ -1,8 +1,8 @@
 {
     "name" : "yuru-compass",
     "appid" : "__UNI__DAE6B8A",
-    "description" : "",
-    "versionName" : "1.0.0",
+    "description" : "摇曳指南",
+    "versionName" : "0.0.1",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -49,12 +49,13 @@
     "quickapp" : {},
     /* 快应用特有相关 */
     "mp-weixin" : {
-        /* 小程序特有相关 */
-        "appid" : "",
+        "appid" : "wxe9cc80e546ea7657",
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {}
     },
-    "vueVersion" : "3"
+    "vueVersion" : "3",
+    "fallbackLocale" : "zh-Hans"
 }
